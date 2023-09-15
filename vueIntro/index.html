@@ -7,7 +7,21 @@
     <title>Vite + Vue + TS</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      {{ greeting }}
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      let app = Vue.createApp({
+        data: function () {
+          return {
+            greeting: 'Hello Vue!'
+          }
+        }
+      })
+      app.mount('#app')
+    </script>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
