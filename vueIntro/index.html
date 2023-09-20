@@ -12,9 +12,11 @@
       height: 200px;
       width: 200px;
     }
+
     .box.two {
       background-color: red;
     }
+
     .box.three {
       background-color: green;
     }
@@ -22,14 +24,18 @@
     [v-cloak] {
       display: none;
     }
-    
+
+    input {
+      margin: 10px;
+      display: block;
+    }
   </style>
 </head>
 
 <body>
   <div id="app" v-cloak>
-    {{ greeting }}
-    <input @keyup.enter="greet(greeting + '!!!')" v-model="greeting" />
+    <login-form />
+
     <hr />
 
     <button @click="toggleBox">Toggle Box</button>
@@ -51,6 +57,31 @@
         },
         greet(greeting) {
           console.log(greeting)
+        }
+      }
+    })
+
+    app.component('login-form', {
+      template: `
+        <form @submit.prevent="handleSubmit">
+          <h1>{{ title }}</h1>
+          <input type="email" v-model="email" />
+          <input type="password" v-model="password" />
+          <button>Log In</button>
+          </form>
+            `,
+      data() {
+        return {
+          title: 'Login Form',
+          email: '',
+          password: '',
+
+        }
+      },
+      methods: {
+        handleSubmit(e) {
+          e.preventDefault()
+          console.log(`The submitted email is ${this.email} and the password is ${this.password}`)
         }
       }
     })
